@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from './reducers';
@@ -11,7 +12,7 @@ import reducers from './reducers';
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducers,
-  composeEnhancer(applyMiddleware())
+  composeEnhancer(applyMiddleware(reduxThunk))
 );
 
 ReactDOM.render(
