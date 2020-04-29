@@ -8,8 +8,10 @@ import {
     FETCH_STREAM
 } from './constants';
 
+import history from '../history';
+
 import jsonApi from '../api/jsonApi';
-import { formValues } from 'redux-form';
+
 
 export const SignIn = (userId) => {
     return {
@@ -24,9 +26,11 @@ export const SignOut = () => {
     };
 };
 
-export const createStream = formValues => async dispatch => {
-    const response = await jsonApi.post('/streams', formValues);
+export const createStream = formValues => async (dispatch, getState) => {
+    const { userId } = getState().auth;
+    const response = await jsonApi.post('/streams', { ...formValues, userId });
     dispatch({ type: CREATE_STREAM, payload: response.data })
+    history.push('/')
 };
 
 export const fetchStreams = () => async dispatch => {
