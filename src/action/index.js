@@ -39,16 +39,17 @@ export const fetchStreams = () => async dispatch => {
 }
 
 export const fetchStream = (id) => async dispatch => {
-    const response = await jsonApi.get(`/stream/${id}`);
+    const response = await jsonApi.get(`/streams/${id}`);
     dispatch({ type: FETCH_STREAM, payload: response.data })
 }
 
 export const editStream = (id, formValues) => async dispatch => {
-    const response = await jsonApi.put(`/stream/${id}`, formValues);
+    const response = await jsonApi.patch(`/streams/${id}`, formValues);
     dispatch({ type: EDIT_STREAM, payload: response.data })
+    history.push('/')
 }
 
 export const deleteStream = (id) => async dispatch => {
-    await jsonApi.delete(`/stream/${id}`)
+    await jsonApi.delete(`/streams/${id}`)
     dispatch({ type: DELETE_STREAM, payload: id });
 }
